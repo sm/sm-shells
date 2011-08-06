@@ -1,0 +1,2 @@
+# BDSM ZSH Extension Template
+

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+package_definition \
+  patches_url "ftp://ftp.gnu.org/gnu/bash/bash-${package_version}-patches"
+

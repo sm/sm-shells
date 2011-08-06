@@ -1,0 +1,2 @@
+# BDSM BASH Extension Template
+

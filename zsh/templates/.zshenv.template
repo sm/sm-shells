@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+# Load profiles in a cascading order.
+for file in "/etc/profile" "/etc/zshenv" "$HOME/.profile" "$HOME/.zshrc" ; do
+  if [[ -s "${file}" ]] ; then
+    source "${file}"
+  fi
+done ; unset file
+

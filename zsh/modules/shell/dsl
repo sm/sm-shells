@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+zsh_postinstall()
+{
+  if user_is_root
+  then
+    upgrade_binary
+  fi
+}
+
+upgrade_binary()
+{
+  original_binary="${prefix_path}/bin/${extension}"
+
+  if [[ -x "$original_binary" ]] ; then
+    original_version=$("$original_binary" -c 'printf $ZSH_VERSION')
+
+    log "Preserving old binary as '$original_binary-$original_version'..."
+
+    move_file "${original_binary}" to "${original_binary}-$original_version"
+  fi
+}
+
+zsh_setup()
+{
+  local file
+
+  for file in .zshenv .zshrc
+  do
+    if file_does_not_exist "${HOME}/${file}"
+    then
+      install_template "zsh/${file}" to "${HOME}/${file}" mode 0644
+    fi
+  done
+}

@@ -1,0 +1,8 @@
+
+# Load profiles in a cascading order.
+for file in "/etc/profile" "/etc/bash.bashrc" "$HOME/.profile" "$HOME/.bashrc" ; do
+  if [[ -s "${file}" ]] ; then
+    source "${file}"
+  fi
+done ; unset file
+
