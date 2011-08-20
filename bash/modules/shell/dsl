@@ -1,4 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
+
+bash_initialize()
+{
+  package_definition \
+    patches_url "ftp://ftp.gnu.org/gnu/bash/bash-${package_version}-patches"
+}
 
 patch_package()
 {

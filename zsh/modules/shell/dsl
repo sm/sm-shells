@@ -1,4 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
+
+zsh_initialize()
+{
+  package_definition \
+    base_url "http://downloads.sourceforge.net/project/zsh/zsh-dev/${package_version}"
+}
 
 zsh_postinstall()
 {
