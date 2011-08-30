@@ -2,7 +2,7 @@
 
 bash_initialize()
 {
-  package_definition \
+  package define \
     patches_url "ftp://ftp.gnu.org/gnu/bash/bash-${package_version}-patches"
 }
 
@@ -20,7 +20,7 @@ patch_package()
 
 bash_postinstall()
 {
-  if user_is_root
+  if user is root
   then
     upgrade_bash
   fi

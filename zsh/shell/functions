@@ -2,15 +2,17 @@
 
 zsh_initialize()
 {
-  package_definition \
+  package define \
     base_url "http://downloads.sourceforge.net/project/zsh/zsh-dev/${package_version}"
 }
 
 zsh_postinstall()
 {
-  if user_is_root
+  if user is root
   then
-    upgrade_binary
+    true
+    # TODO: make this opt-in
+    # upgrade_binary
   fi
 }
 
