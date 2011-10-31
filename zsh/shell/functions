@@ -1,9 +1,8 @@
 #!/bin/sh
 
-zsh_initialize()
+zsh_prefetch()
 {
-  package define \
-    base_url "http://downloads.sourceforge.net/project/zsh/zsh-dev/${package_version}"
+  package define base_url "http://sourceforge.net/projects/zsh/files/zsh-dev/${package_version}"
 }
 
 zsh_postinstall()
