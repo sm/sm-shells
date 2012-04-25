@@ -5,16 +5,17 @@ zsh_prefetch()
   package define base_url "http://sourceforge.net/projects/zsh/files/zsh-dev/${package_version}"
 }
 
+# Enable modules to be loaded
 zsh_postconfigure()
 {
-  # Enable pcre & regex to be loaded
+  typeset _mode _modules
   if [[ ${static_flag:-0} == 1 || "$LDFLAGS" =~ "static" ]]
-  then
-    sed -E -i "" "/zsh\/(pcre|regex)/ { s/link=no/link=static/ ; s/auto=yes/auto=no/ ; }" config.modules
-  else
-    sed -E -i "" "/zsh\/(pcre|regex)/ { s/link=no/link=dynamic/ ; s/auto=yes/auto=no/ ; }" config.modules
+  then _mode=static
+  else _mode=dynamic
   fi
-  grep -E "zsh\/(pcre|regex)" config.modules | __sm.log.debug package -
+  _modules="zsh\/(pcre|regex)"
+  sed -E -i "" "/${_modules}/ { s/link=no/link=${_mode}/ ; s/auto=yes/auto=no/ ; }" config.modules
+  grep -E "${_modules}" config.modules | __sm.log.debug package -
 }
 
 zsh_postinstall()
