@@ -8,11 +8,11 @@ zsh_prefetch()
 zsh_postconfigure()
 {
   # Enable pcre & regex to be loaded
-  if [[ ${static_flag:-0} == 0 ]]
+  if [[ ${static_flag:-0} == 1 || "$LDFLAGS" =~ "static" ]]
   then
-    sed -ri "/zsh\/(pcre|regex)/ { s/link=no/link=dynamic/ ; s/auto=yes/auto=no/ }" config.modules
-  else
     sed -ri "/zsh\/(pcre|regex)/ { s/link=no/link=static/ ; s/auto=yes/auto=no/ }" config.modules
+  else
+    sed -ri "/zsh\/(pcre|regex)/ { s/link=no/link=dynamic/ ; s/auto=yes/auto=no/ }" config.modules
   fi
   grep -E "zsh\/(pcre|regex)" config.modules | __sm.log.debug package -
 }
